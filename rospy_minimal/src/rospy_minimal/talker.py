@@ -13,21 +13,20 @@ class Talker(object):
         self._listen_topic = listen_topic
         self._message = 'hello world!'
         # TODO(minhnh) create a rospy.Publisher which publishes std_msgs/String messages
-        self._publisher = None
+        self._publisher = rospy.Publisher(self._talk_topic, String, queue_size=15)
         # TODO(minhnh) create a rospy.Subscriber which subscribes to std_msgs/String messages using
         # self._subscriber_cb as callback
-        self._subscriber = None
+        self._subscriber = rospy.Subscriber(self._listen_topic, String, self._subscriber_cb)
 
     def talk(self):
         if self._publisher is None:
             print('you have not created a rospy.Publisher object, will not publish the message "%s" to topic "%s"'
                   % (self._message, self._talk_topic))
             return
-
         # TODO(minhnh) create publisher, remove the line raising error, create and publish a String message containing
         # self._message as data
-        raise NotImplementedError()
+	self._publisher.publish(String(self._message))
 
     def _subscriber_cb(self, msg):
         # TODO(minhnh) set self._message to the message data
-        raise NotImplementedError()
+        self._message=msg.data

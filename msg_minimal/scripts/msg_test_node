@@ -6,7 +6,7 @@ from msg_minimal.msg import Minimal
 class MinimalMsgTest(object):
     def __init__(self, minimal_topic):
         # TODO(minhnh) subscribes to 'minimal_topic' of type Minimal message and with callback self._minimal_cb
-        self._minimal_sub = None
+        self._minimal_sub = rospy.Subscriber(minimal_topic, Minimal, self._minimal_cb)
         self._result = -1.0
 
     def _minimal_cb(self, msg):
@@ -22,9 +22,17 @@ class MinimalMsgTest(object):
             rospy.logwarn('message does not have field "operation" of type "string"')
             return
 
+	if msg.operation == 'sum':
+		self._result = msg.a+msg.b
+	elif msg.operation == 'sub':
+		self._result = msg.a-msg.b
+	elif msg.operation == 'mul':
+		self._result = msg.a*msg.b
+	elif msg.operation == 'div':
+		self._result = msg.a/msg.b
         # TODO(minhnh): calculate self._result based on numbers and operation specified in Minimal.msg
         # operation can be sum, subtract, multiply, divide
-        raise NotImplementedError()
+        #raise NotImplementedError()
 
     def print_result(self):
         rospy.loginfo('result: %.3f', self._result)
