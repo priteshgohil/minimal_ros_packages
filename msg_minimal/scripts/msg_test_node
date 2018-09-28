@@ -24,10 +24,19 @@ class MinimalMsgTest(object):
 
         # TODO(minhnh): calculate self._result based on numbers and operation specified in Minimal.msg
         # operation can be sum, subtract, multiply, divide
-	if msg.operation == 'sum':
-	    self._result = msg.a + msg.b
-	    return
-	
+        if msg.operation == 'sum':
+            self._result = msg.a + msg.b
+            return
+        elif msg.operation == 'sub':
+            self._result = msg.a - msg.b
+            return
+        elif msg.operation == 'mul':
+            self._result = msg.a*msg.b
+            return
+        elif msg.operation == 'div':
+            self._result = msg.a/msg.b
+            return
+
         raise NotImplementedError()
 
     def print_result(self):

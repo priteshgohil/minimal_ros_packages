@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>action_test</name>
+  <version>0.0.0</version>
+  <description>The action_test package</description>
+
+  <maintainer email="pritesh@todo.todo">pritesh</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>actionlib</exec_depend>
+  <depend>actionlib_tutorials</depend>
+</package>

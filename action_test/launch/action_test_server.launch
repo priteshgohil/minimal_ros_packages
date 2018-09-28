@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="action_test" type="action_test_server" name="action_test_server" output="screen">
+    </node>
+</launch>

@@ -26,8 +26,8 @@ class Talker(object):
 
         # TODO(minhnh) create publisher, remove the line raising error, create and publish a String message containing
         # self._message as data
-	message = String()
-	message.data = self._message
+        message = String()
+        message.data = self._message
         self._publisher.publish(message)
 
     def _subscriber_cb(self, msg):
