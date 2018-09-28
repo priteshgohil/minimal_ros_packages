@@ -8,12 +8,21 @@ def handle_minimal_request(request):
     if getattr(request, 'request', None) is None:
         rospy.logerr('message does not have field "a" of type "msg_minimal/Minimal"')
         return
+    response=MinimalServiceResponse()
 
-    rospy.loginfo(request.request.a)
-    rospy.loginfo(request.request.b)
-    rospy.loginfo(request.request.operation)
-
-    return MinimalServiceResponse()
+    if request.request.operation =='sum':
+        response.result=request.request.a + request.request.b
+        return response
+    elif request.request.operation =='sub':
+        response.result=request.request.a - request.request.b
+        return response
+    elif request.request.operation =='mul':
+        response.result=request.request.a * request.request.b
+        return response
+    elif request.request.operation =='div':
+        response.result=request.request.a / request.request.b
+        return response
+    return response
 
 
 if __name__ == '__main__':
@@ -22,5 +31,6 @@ if __name__ == '__main__':
 
     # TODO(minhnh): create a service using "handle_minimal_request" as the callback
     minimal_service = rospy.Service(param_minimal_service_name, MinimalService, handle_minimal_request)
+    rospy.loginfo('running a calculator server')
     while not rospy.is_shutdown():
         rospy.sleep(1.0)                # sleep for 1 second
